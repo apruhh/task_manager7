@@ -1,8 +1,12 @@
-# Dependencies
+# Dependencies - CRITICAL to exclude these!
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+backend/node_modules/
+frontend/node_modules/
+
+# Build outputs and dependencies
+package-lock.json
+backend/package-lock.json
+frontend/package-lock.json
 
 # Environment variables
 .env
@@ -12,8 +16,11 @@ yarn-error.log*
 .env.production.local
 
 # Logs
-logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
 
 # Runtime data
 pids
@@ -24,21 +31,6 @@ pids
 # Coverage directory
 coverage/
 .nyc_output
-
-# Dependency directories
-jspm_packages/
-
-# Optional npm cache directory
-.npm
-
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
-
-# Yarn Integrity file
-.yarn-integrit
 
 # IDE files
 .vscode/
@@ -59,10 +51,22 @@ Thumbs.db
 dist/
 build/
 
-# Database files (if any)
+# Database files
 *.db
 *.sqlite
 
 # Temporary files
 tmp/
 temp/
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
