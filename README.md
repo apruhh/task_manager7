@@ -3,23 +3,23 @@
 ---------------------
 1. Start MySQL Server and create the table.
 ---------------------
->>>>>>  mysql -u root -p
->>>>>>  # (Then paste SQL from above)
+mysql -u root -p
+ # (Then paste SQL from above)
 
 ***************************************************
 
 ----------------------------------------------------
 2. Run Backend
 ----------------------------------------------------
->>>>>>  cd backend
->>>>>>  npm install express mysql2 cors
->>>>>>  node server.js
+ cd backend
+ npm install express mysql2 cors
+ node server.js
 
 ***************************************************
 
 ---------------------------------------------------
 3. Run Frontend
 ---------------------------------------------------
->>>>>>  cd notes-frontend
->>>>>>  npm start
+ cd notes-frontend
+ npm start
 ***************************************************
