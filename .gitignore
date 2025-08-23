@@ -8,6 +8,11 @@ package-lock.json
 backend/package-lock.json
 frontend/package-lock.json
 
+# .gitignore
+.env
+node_modules/
+
+
 # Environment variables
 .env
 .env.local
