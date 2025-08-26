@@ -12,19 +12,19 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'npm run build'
+                bat 'npm run build'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'npm test || true'  // allows pipeline to continue even if no tests
+                bat 'npm test || exit 0'   // allow tests to fail without breaking
             }
         }
 
