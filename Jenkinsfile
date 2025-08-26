@@ -10,27 +10,33 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Install Frontend Dependencies') {
             steps {
-                bat 'npm install'
+                dir('frontend') {
+                    bat 'npm install'
+                }
             }
         }
 
-        stage('Build') {
+        stage('Build Frontend') {
             steps {
-                bat 'npm run build'
+                dir('frontend') {
+                    bat 'npm run build'
+                }
             }
         }
 
-        stage('Test') {
+        stage('Test Frontend') {
             steps {
-                bat 'npm test || exit 0'   // allow tests to fail without breaking
+                dir('frontend') {
+                    bat 'npm test || exit 0'
+                }
             }
         }
 
         stage('Archive') {
             steps {
-                archiveArtifacts artifacts: 'build/**', followSymlinks: false
+                archiveArtifacts artifacts: 'frontend/build/**', followSymlinks: false
             }
         }
     }
