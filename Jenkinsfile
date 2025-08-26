@@ -10,6 +10,7 @@ pipeline {
             }
         }
 
+        /* ---------- FRONTEND ---------- */
         stage('Install Frontend Dependencies') {
             steps {
                 dir('frontend') {
@@ -29,12 +30,30 @@ pipeline {
         stage('Test Frontend') {
             steps {
                 dir('frontend') {
-                    bat 'npm test || exit 0'
+                    bat 'npm test -- --watchAll=false --passWithNoTests'
                 }
             }
         }
 
-        stage('Archive') {
+        /* ---------- BACKEND ---------- */
+        stage('Install Backend Dependencies') {
+            steps {
+                dir('backend') {
+                    bat 'npm install'
+                }
+            }
+        }
+
+        stage('Test Backend') {
+            steps {
+                dir('backend') {
+                    bat 'npm test -- --passWithNoTests'
+                }
+            }
+        }
+
+        /* ---------- ARTIFACTS ---------- */
+        stage('Archive Frontend Build') {
             steps {
                 archiveArtifacts artifacts: 'frontend/build/**', followSymlinks: false
             }
