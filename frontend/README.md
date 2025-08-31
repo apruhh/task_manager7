@@ -1,70 +1,226 @@
-# Getting Started with Create React App
+# Notes App Frontend with Authentication
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based frontend for the Notes application with complete user authentication, protected routes, and JWT token management.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **User Authentication**: Signup and login functionality
+- **Protected Routes**: JWT-based route protection
+- **State Management**: Centralized authentication state
+- **API Integration**: Secure API calls with authentication headers
+- **Responsive Design**: Modern, mobile-friendly UI
+- **Auto-logout**: Automatic logout on token expiration
 
-### `npm start`
+## 🏗️ Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+frontend/src/
+├── components/
+│   ├── LoginForm.js          # User login component
+│   ├── SignupForm.js         # User registration component
+│   ├── ProtectedRoute.js     # Route protection component
+│   ├── NotesPage.js          # Main notes page (protected)
+│   ├── NoteForm.js           # Note creation/editing form
+│   ├── NoteList.js           # Notes display component
+│   ├── AuthForms.css         # Authentication form styles
+│   └── NotesPage.css         # Notes page styles
+├── utils/
+│   └── api.js                # API configuration and utilities
+├── App.js                    # Main app with routing
+└── App.css                   # App-wide styles
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🔐 Authentication Flow
 
-### `npm test`
+1. **User Registration** (`/signup`)
+   - Username and password validation
+   - Password confirmation
+   - Redirects to login after successful signup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **User Login** (`/login`)
+   - Credentials validation
+   - JWT token storage in localStorage
+   - Automatic redirect to main notes page
 
-### `npm run build`
+3. **Protected Routes**
+   - All notes functionality requires valid JWT
+   - Automatic redirect to login if token is missing/invalid
+   - Token expiration handling
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. **Logout**
+   - Clears authentication data
+   - Redirects to login page
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠️ Installation & Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
+- Backend server running on `http://localhost:5000`
 
-### `npm run eject`
+### Install Dependencies
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Start Development Server
+```bash
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The app will open at `http://localhost:3000`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 📱 Available Routes
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **`/`** - Main notes page (protected, requires login)
+- **`/login`** - User login page
+- **`/signup`** - User registration page
+- **`*`** - Catch-all route (redirects based on auth status)
 
-## Learn More
+## 🔧 API Integration
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Authentication Endpoints
+- `POST /api/login` - User login
+- `POST /api/signup` - User registration
+- `GET /api/profile` - Get user profile (protected)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Notes Endpoints (All Protected)
+- `GET /notes` - Fetch user's notes
+- `POST /notes` - Create new note
+- `PUT /notes/:id` - Update existing note
+- `DELETE /notes/:id` - Delete note
 
-### Code Splitting
+### API Headers
+All protected endpoints automatically include:
+```
+Authorization: Bearer <jwt_token>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🎨 UI Components
 
-### Analyzing the Bundle Size
+### LoginForm
+- Username and password inputs
+- Form validation
+- Error handling
+- Loading states
+- Link to signup page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### SignupForm
+- Username, password, and confirm password
+- Password validation (minimum 6 characters)
+- Password confirmation matching
+- Form validation
+- Link to login page
 
-### Making a Progressive Web App
+### NotesPage
+- Protected main page
+- User welcome message
+- Logout button
+- Notes management interface
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### ProtectedRoute
+- JWT token validation
+- Automatic redirect to login if unauthorized
+- Seamless user experience
 
-### Advanced Configuration
+## 🔒 Security Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **JWT Token Storage**: Secure localStorage usage
+- **Route Protection**: Automatic authentication checks
+- **Token Expiration**: Automatic logout on expired tokens
+- **Input Validation**: Client-side form validation
+- **Error Handling**: Graceful error management
+- **Auto-redirect**: Seamless authentication flow
 
-### Deployment
+## 🚀 Usage Examples
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Creating a New User
+1. Navigate to `/signup`
+2. Enter username and password
+3. Confirm password
+4. Submit form
+5. Redirected to login page
 
-### `npm run build` fails to minify
+### Logging In
+1. Navigate to `/login`
+2. Enter credentials
+3. Submit form
+4. Automatically redirected to main notes page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Accessing Protected Routes
+- All notes functionality is automatically protected
+- JWT token is automatically included in API calls
+- Unauthorized access redirects to login
+
+### Logging Out
+- Click logout button in header
+- Authentication data is cleared
+- Redirected to login page
+
+## 🎯 Key Features
+
+- **Responsive Design**: Works on all device sizes
+- **Modern UI**: Clean, professional appearance
+- **Error Handling**: Comprehensive error management
+- **Loading States**: User feedback during operations
+- **Auto-redirect**: Seamless navigation flow
+- **Token Management**: Automatic JWT handling
+
+## 🔧 Customization
+
+### Styling
+- Modify `AuthForms.css` for authentication styling
+- Modify `NotesPage.css` for main page styling
+- Update `App.css` for app-wide styles
+
+### API Configuration
+- Update `utils/api.js` for different backend URLs
+- Modify authentication headers if needed
+- Add new API endpoints as required
+
+### Routing
+- Update `App.js` for new routes
+- Modify `ProtectedRoute.js` for custom protection logic
+- Add new protected components as needed
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **CORS Errors**
+   - Ensure backend has CORS enabled
+   - Check API base URL in `utils/api.js`
+
+2. **Authentication Errors**
+   - Verify JWT secret in backend
+   - Check token expiration settings
+   - Ensure proper Authorization headers
+
+3. **Routing Issues**
+   - Verify react-router-dom installation
+   - Check route definitions in App.js
+   - Ensure proper component imports
+
+4. **API Connection Issues**
+   - Verify backend server is running
+   - Check API endpoints in backend
+   - Verify database connection
+
+## 📚 Dependencies
+
+- **react**: ^19.1.0
+- **react-dom**: ^19.1.0
+- **react-router-dom**: ^6.x.x
+- **axios**: ^1.9.0
+
+## 🤝 Contributing
+
+1. Follow the existing code structure
+2. Maintain authentication security
+3. Test all authentication flows
+4. Ensure responsive design
+5. Update documentation as needed
+
+## 📄 License
+
+This project is part of the Notes application with authentication system.
