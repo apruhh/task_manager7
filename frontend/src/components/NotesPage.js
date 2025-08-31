@@ -5,7 +5,7 @@ import NoteList from './NoteList';
 import { notesAPI } from '../utils/api';
 import './NotesPage.css';
 
-const NotesPage = () => {
+const NotesPage = ({ onLogout }) => {
   const [notes, setNotes] = useState([]);
   const [form, setForm] = useState({ title: '', description: '' });
   const [editingId, setEditingId] = useState(null);
@@ -19,6 +19,11 @@ const NotesPage = () => {
       setUser(JSON.parse(userInfo));
     }
   }, []);
+
+  // Debug logging for onLogout prop
+  useEffect(() => {
+    console.log('🔍 NotesPage received onLogout prop:', !!onLogout);
+  }, [onLogout]);
 
   const fetchNotes = async () => {
     try {
@@ -68,11 +73,23 @@ const NotesPage = () => {
   };
 
   const handleLogout = () => {
+    console.log('🚪 NotesPage handleLogout called');
+    
+    // Call parent's logout handler to update App.js state
+    if (onLogout) {
+      console.log('🔄 Calling parent onLogout callback');
+      onLogout();
+    } else {
+      console.warn('⚠️ onLogout prop not provided to NotesPage');
+    }
+    
     // Clear authentication data
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    console.log('🗑️ localStorage cleared');
     
     // Redirect to login page
+    console.log('🔄 Navigating to /login');
     navigate('/login');
   };
 

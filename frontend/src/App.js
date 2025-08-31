@@ -26,17 +26,24 @@ function App() {
 
   // Handle successful login
   const handleLogin = (token, userInfo) => {
+    console.log('🔐 App.js handleLogin called with token and user:', { hasToken: !!token, username: userInfo?.username });
     setIsAuthenticated(true);
     setUser(userInfo);
   };
 
   // Handle logout
   const handleLogout = () => {
+    console.log('🔄 App.js handleLogout called - clearing auth state');
     setIsAuthenticated(false);
     setUser(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    // localStorage clearing is handled by NotesPage component
+    console.log('🔄 App.js auth state cleared - isAuthenticated:', false);
   };
+
+  // Log the current route being rendered
+  useEffect(() => {
+    console.log('🔍 App.js useEffect - authentication state changed:', { isAuthenticated, hasUser: !!user });
+  }, [isAuthenticated, user]);
 
   // Show loading spinner while checking authentication
   if (loading) {
@@ -48,6 +55,9 @@ function App() {
     );
   }
 
+  // Debug logging for login route
+  console.log('🔍 App.js render - isAuthenticated:', isAuthenticated);
+
   return (
     <Router>
       <div className="App">
@@ -56,9 +66,11 @@ function App() {
           <Route 
             path="/login" 
             element={
-              isAuthenticated ? 
-                <Navigate to="/" replace /> : 
+              isAuthenticated ? (
+                <Navigate to="/" replace />
+              ) : (
                 <LoginForm onLogin={handleLogin} />
+              )
             } 
           />
           <Route 

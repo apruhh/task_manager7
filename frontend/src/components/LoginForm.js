@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { authAPI } from '../utils/api';
 import './AuthForms.css';
 
 const LoginForm = ({ onLogin }) => {
+  console.log('🔍 LoginForm component rendering');
+  
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -11,6 +13,14 @@ const LoginForm = ({ onLogin }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  // Debug logging for component lifecycle
+  useEffect(() => {
+    console.log('🔍 LoginForm component mounted');
+    return () => {
+      console.log('🔍 LoginForm component unmounted');
+    };
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
