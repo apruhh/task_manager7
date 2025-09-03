@@ -10,5 +10,5 @@ Run Backend
 
 3. Run Frontend
 
- cd notes-frontend
+ cd frontend
  npm start
