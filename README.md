@@ -1,16 +1,16 @@
-# task-manager
- Running the App
+###Task Manager
 
-1. Run Backend
+## Running the App
 
- cd backend
- 
- npm install express mysql2 cors
- node server.js (or) npm start
+### Run Backend
 
+cd backend
+npm install
+node server.js   # or use: npm start
 
-2. Run Frontend
+### Run BFrontend 
 
- cd frontend
- npm install
- npm start
+cd frontend 
+npm install
+npm start
+
