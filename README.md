@@ -1,14 +1,14 @@
-### Task Manager
+## Task Manager
 
-## Running the App
+# Running the App
 
-### Run Backend
+1. Run Backend
 
 cd backend
 npm install
 node server.js   # or use: npm start
 
-### Run BFrontend 
+2. Run BFrontend 
 
 cd frontend 
 npm install
