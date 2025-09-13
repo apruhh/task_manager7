@@ -1,0 +1,43 @@
+name: CI - Build & Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Backend
+      - name: Setup Node.js for backend
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install backend deps
+        working-directory: ./backend
+        run: npm install
+
+      - name: Run backend tests
+        working-directory: ./backend
+        run: npm test   # change if you don’t have tests
+
+      # Frontend
+      - name: Setup Node.js for frontend
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install frontend deps
+        working-directory: ./frontend
+        run: npm install
+
+      - name: Build frontend
+        working-directory: ./frontend
+        run: npm run build
