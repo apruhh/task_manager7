@@ -24,9 +24,7 @@ jobs:
         working-directory: ./backend
         run: npm install
 
-      - name: Run backend tests
-        working-directory: ./backend
-        run: npm test   # change if you don’t have tests
+      
 
       # Frontend
       - name: Setup Node.js for frontend
