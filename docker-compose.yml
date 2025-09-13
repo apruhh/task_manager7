@@ -1,0 +1,38 @@
+services:
+  backend:
+    build: ./backend
+    container_name: taskmanager-backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=taskmanager
+
+  frontend:
+    build: ./frontend
+    container_name: taskmanager-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  db:
+    image: mysql:8.0
+    container_name: taskmanager-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: taskmanager
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./MySQL:/docker-entrypoint-initdb.d
+
+volumes:
+  db_data:
+
