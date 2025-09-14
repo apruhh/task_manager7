@@ -1,8 +1,8 @@
 TaskManager
 
-Group X Project
+Group 3 Project
 
-GitHub Repository: https://github.com/<your-username>/taskmanager
+GitHub Repository: https://github.com/varun791/taskmanager
 
 🌟 Project Overview
 
